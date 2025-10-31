@@ -18,8 +18,11 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'image',
+        'bio',
     ];
 
     /**
@@ -41,4 +44,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get the public URL for the user's image stored in the public disk.
+     */
+    public function imageUrl(): string
+    {
+        return asset('storage/' . $this->image);
+    }
 }
